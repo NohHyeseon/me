@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.common;
+package com.me.preschoolme.common;
 
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

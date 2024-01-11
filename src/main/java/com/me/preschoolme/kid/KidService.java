@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.kid;
+package com.me.preschoolme.kid;
 
 import org.springframework.stereotype.Service;
 

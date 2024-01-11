@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.album;
+package com.me.preschoolme.album;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

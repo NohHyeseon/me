@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.album;
+package com.me.preschoolme.album;
 
 import org.springframework.stereotype.Service;
 

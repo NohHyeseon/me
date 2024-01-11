@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.teacher;
+package com.me.preschoolme.teacher;
 
 import org.springframework.stereotype.Service;
 

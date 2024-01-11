@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.kid.model;
+package com.me.preschoolme.kid.model;
 
 import lombok.Data;
 

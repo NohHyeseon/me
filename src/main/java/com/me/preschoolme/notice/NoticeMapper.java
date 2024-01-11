@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.notice;
+package com.me.preschoolme.notice;
 
 import org.apache.ibatis.annotations.Mapper;
 

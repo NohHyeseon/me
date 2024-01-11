@@ -1,4 +1,4 @@
-package com.preschool.preschoolhome.common;
+package com.me.preschoolme.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
