@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class ParentInsDto {
+    private int duplication_cehck;
     private String parentNm;
     private int phoneNb;
     private String uid;
     private String upw;
     private int code;
     private int irank;
-
 }

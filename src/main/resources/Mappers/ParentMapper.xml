@@ -3,5 +3,32 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.me.preschoolme.parent.ParentMapper">
 
+   <select id="selCode">
+       select K.ikid, K.kidnm, K.iclass, K.code
+       from t_kid K
+       join t_parent P
+       on K.code = P.code
+       where P.code =#{code}
+   </select>
+
+    <select id="selId">
+        select uid
+        from t_parent
+    </select>
+
+    <update id="upCheckUid">
+        <selectKey resultType="String" keyProperty="uid" order="BEFORE">
+            select uid
+            from t_parent
+        </selectKey>
+        update duplication_check
+    </update>
+
+    <insert id="insParent" useGeneratedKeys="true" keyProperty="iparent">
+        insert into t_parent
+        set parent_nm =#{parentNm},
+        uid=#{uid}, upw=#{upw}, phone_nb=#{phoneNb},
+        code=#{code}
+    </insert>
 
 </mapper>
