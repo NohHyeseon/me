@@ -3,8 +3,7 @@ package com.me.preschoolme.parent.model;
 import lombok.Data;
 
 @Data
-public class CodeDto {
-    private String code;
+public class ParentKid {
     private int iparent;
-
+    private int ikid;
 }

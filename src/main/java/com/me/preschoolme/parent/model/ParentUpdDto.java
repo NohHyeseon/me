@@ -6,10 +6,10 @@ import lombok.Data;
 public class ParentUpdDto {
     private int iparent;
     private String parentNm;
-    private int phoneNb;
+    private String phoneNb;
     private String uid;
     private String upw;
-    private int code;
+    private String code;
     private int irank;
 
 }
