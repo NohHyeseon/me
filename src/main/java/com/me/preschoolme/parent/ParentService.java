@@ -5,11 +5,13 @@ import com.me.preschoolme.common.Const;
 import com.me.preschoolme.common.ResVo;
 import com.me.preschoolme.parent.model.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static com.me.preschoolme.common.Const.*;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ParentService {
     private final ParentMapper mapper;
@@ -81,7 +83,27 @@ public class ParentService {
         return vo;
 
     }
+
+    public ResVo putParent(UpParentDto dto){
+        ResVo vo = new ResVo();
+        if (dto.getParentNm() == null && dto.getPhoneNb() == null && dto.getAddress() == null
+        && dto.getUpw()==null) {
+            throw new RuntimeException();// 예외처리
+        }
+        int result1 = mapper.putParent(dto);
+        if(result1 == 0){
+            throw new RuntimeException();
+        }
+        log.info("vo: {}",vo);
+        return vo;
+
+
+
+    }
 }
+
+
+
 
 
 

@@ -1,10 +1,7 @@
 package com.me.preschoolme.parent;
 
 import com.me.preschoolme.common.ResVo;
-import com.me.preschoolme.parent.model.CodeDto;
-import com.me.preschoolme.parent.model.CodeVo;
-import com.me.preschoolme.parent.model.ParentInsDto;
-import com.me.preschoolme.parent.model.ParentUpdDto;
+import com.me.preschoolme.parent.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +36,11 @@ public class ParentController {
     @PostMapping("/kidadd")
     public CodeVo postAddkid(@RequestBody CodeDto dto) {
         return service.postKidCode(dto);
+    }
+
+    @PutMapping("/putParent")
+    public ResVo putParent(@RequestBody UpParentDto dto){
+        return service.putParent(dto);
     }
 
 

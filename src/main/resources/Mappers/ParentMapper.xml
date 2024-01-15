@@ -50,8 +50,9 @@
     <update id="putParent">
         update t_parent
         set parent_nm = #{parentNm}, phone_nb = #{phoneNb},
-        address = #{address}, upw = #{upw}
-
+        address = #{address}, upw = #{upw},
+        irank = #{irank}
+        where iparent = #{iparent}
     </update>
 
    
