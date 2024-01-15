@@ -49,6 +49,10 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
+    // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
+    implementation 'com.mysql:mysql-connector-j'
+
+
 }
 
 tasks.named('test') {
