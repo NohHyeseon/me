@@ -6,6 +6,8 @@ spring:
     password: green502
 
 
+
+
 mybatis:
   mapper-locations: mappers/**/*.xml
 springdoc:
