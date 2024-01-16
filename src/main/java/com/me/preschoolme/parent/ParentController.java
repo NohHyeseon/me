@@ -23,7 +23,7 @@ public class ParentController {
     //부모아이디 중복확인
     @GetMapping("/signup")
     public ResVo postParentSignup(ParentInsDto dto) {
-        return service.insParent(dto);
+        return service.chekUid(dto);
     }
 
     //부모회원가입

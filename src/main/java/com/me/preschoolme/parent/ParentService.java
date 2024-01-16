@@ -55,7 +55,7 @@ public class ParentService {
         ResVo result = new ResVo();
         if (dto.getIsValid() != 1) {
             result.setResult(-1);//회원가입 불가
-            result.setMessage("회원가입 실패");
+            result.setMessage("아이디 중복체크를 누르세요");
             return result;
         }
         int success = mapper.insParent(dto);
