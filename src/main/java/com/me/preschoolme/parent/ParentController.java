@@ -14,14 +14,14 @@ public class ParentController {
     private final ParentService service;
 
     //식별코드매칭
-    @GetMapping("/code")
+    @GetMapping("/check")
     public CodeVo postParentCheck(@RequestBody CodeDto dto) {
         return service.getMatch(dto);
     }
 
 
     //부모아이디 중복확인
-    @PostMapping("/signin")
+    @GetMapping("/signup")
     public ResVo postParentSignup(ParentInsDto dto) {
         return service.insParent(dto);
     }
@@ -29,7 +29,13 @@ public class ParentController {
     //부모회원가입
     @PostMapping("/signup")
     public ResVo postSignup(@RequestBody ParentInsDto dto) {
-        return service.chekUid(dto);
+        return service.insParent(dto);
+    }
+
+    //부모님 로그인
+    @PostMapping("/signin")
+    public ParentKid postParentSignin(@RequestBody ParentSigninDto dto){
+        return service.parentSignin(dto);
     }
 
     //부모 마이페이지상 식별코드로 원아등록

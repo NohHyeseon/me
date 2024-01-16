@@ -8,7 +8,7 @@ import lombok.Getter;
 public class CodeVo {
     private String  code;
     private int ikid;
-    private String kidnm;
+    private String kidNm;
     private int iclass;
 
 }

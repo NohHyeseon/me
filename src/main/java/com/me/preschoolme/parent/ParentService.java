@@ -32,7 +32,7 @@ public class ParentService {
 
     //아이디중복체크
     public ResVo chekUid(ParentInsDto dto) {
-        String checkUid = mapper.selId(dto.getUid());
+        String checkUid = mapper.checkParentInfo(dto.getUid());
         ResVo response = new ResVo();
         if (checkUid != null) {
             response.setIsValid(-2);
@@ -54,12 +54,19 @@ public class ParentService {
     public ResVo insParent(ParentInsDto dto) {
         ResVo result = new ResVo();
         if (dto.getIsValid() != 1) {
-            throw new RuntimeException();
+            result.setResult(-1);//회원가입 불가
+            result.setMessage("회원가입 실패");
+            return result;
         }
         int success = mapper.insParent(dto);
+
         if (success > 0) {
             result.setResult(1);
             result.setMessage("회원가입 성공");
+            ParentKid pk = new ParentKid();
+            pk.setIkid(dto.getIkid());
+            pk.setIparent(dto.getIparent());
+            mapper.insKid(pk);
             return result;
         } else {
             // 데이터베이스 삽입이 실패한 경우
@@ -70,36 +77,48 @@ public class ParentService {
     //iparent, ikid 테이블에 추가
     public CodeVo postKidCode(CodeDto dto) {
         CodeVo vo = mapper.selCode(dto);
-         //code를 이용해서 PK가져옴
+        //code를 이용해서 PK가져옴
+
         ParentKid pk = new ParentKid();
         pk.setIkid(vo.getIkid());
         pk.setIparent(dto.getIparent());
-
-        if (vo.getIkid() < 0) {
-            return null;
-        }
         mapper.insKid(pk);
+        if (vo.getIkid() < 0) {
+            throw new RuntimeException(RUNTIME_EX_MESSAGE);
+        }
+
 
         return vo;
 
     }
 
-    public ResVo putParent(UpParentDto dto){
+    //부모 마이페이지ㅏ 정보수정
+    public ResVo putParent(UpParentDto dto) {
         ResVo vo = new ResVo();
         if (dto.getParentNm() == null && dto.getPhoneNb() == null && dto.getAddress() == null
-        && dto.getUpw()==null) {
-            throw new RuntimeException();// 예외처리
+                && dto.getUpw() == null) {
+            throw new RuntimeException(RUNTIME_EX_MESSAGE);// 예외처리
         }
         int result1 = mapper.putParent(dto);
-        if(result1 == 0){
+        if (result1 == 0) {
             throw new RuntimeException();
         }
-        log.info("vo: {}",vo);
+        log.info("vo: {}", vo);
         return vo;
 
-
-
     }
+
+    public ParentKid parentSignin(ParentSigninDto dto){
+        ParentSigninVo saveVo = new ParentSigninVo();
+        ParentKid pk = new ParentKid();
+        if(dto.getUid() != null && dto.getUpw() !=null &&dto.getUpw().equals(saveVo.getUpw())){
+            mapper.selParent(dto);
+            dto.setIparent(pk.getIparent());
+//            pk.setIkid(mapper.selKid());
+        }
+        return null;
+    }
+
 }
 
 

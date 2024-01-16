@@ -4,23 +4,31 @@
 <mapper namespace="com.me.preschoolme.parent.ParentMapper">
 
     <select id="selCode">
-        select K.ikid, K.kidnm, K.iclass, K.code
+        select K.ikid, K.kid_nm as kidNm, K.iclass, K.code
         from t_kid K
         join t_parent P
         on K.code = P.code
         where P.code =#{code}
     </select>
 
+
+
     <insert id="insKid">
         insert into t_parent_kid
         set ikid = #{ikid} and iparent = #{iparent}
     </insert>
 
-    <select id="selId">
-        select uid
+<!--    <select id="selId">-->
+<!--        select uid-->
+<!--        from t_parent-->
+<!--        where uid = #{uid}-->
+<!--    </select>-->
+    <select id="selParent">
+        selet uid, upw
         from t_parent
-        where uid = #{uid}
+        where uid = #{uid} and upw = #{upw}
     </select>
+
 
     <update id="upCheckUid">
         <selectKey resultType="String" keyProperty="uid" order="BEFORE">
@@ -30,23 +38,24 @@
         update duplication_check
     </update>
 
-    <insert id="insParent">
-        <selectKey resultType="String" keyProperty="ikid" order="BEFORE">
-            select ikid
-            from t_kid
-            where code = #{code}
-        </selectKey>
-        <selectKey resultType="String" keyProperty="iparent" order="BEFORE">
-            insert into t_parent
-            set parent_nm =#{parentNm},
-            uid=#{uid}, upw=#{upw}, phone_nb=#{phoneNb}, irelation = #{irelation}
-            irank =1
-        </selectKey>
-        insert into t_parent_kid
-        set ikid = #{ikid},
-        iparent = #{iparent}
+    <select id="checkParentInfo">
+        select upw
+        from t_parent
+        where uid =#{uid}
+    </select>
+    <select id="selKid">
+        select ikid
+        from t_parent_kid
+        where ikid = #{ikid}
+    </select>
 
+
+    <insert id="insParent" useGeneratedKeys="true" keyProperty="iprent">
+        insert into t_parent
+        set parent_nm = #{parentNm}, uid = #{uid}, upw = #{upw},
+        phone_nb = #{phoneNb}, irelation = #{irelation}
     </insert>
+
     <update id="putParent">
         update t_parent
         set parent_nm = #{parentNm}, phone_nb = #{phoneNb},

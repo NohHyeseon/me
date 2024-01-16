@@ -6,10 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ParentMapper {
-    CodeVo selCode(CodeDto dto);
-    String selId(String uid);
-    int insParent(ParentInsDto dto);
-    int insKid(ParentKid dto);
-    int putParent(UpParentDto dto);
+    CodeVo selCode(CodeDto dto); //식별코드확인
+    String checkParentInfo(String uid);//아이디중복체크
+    int insParent(ParentInsDto dto); //부모회원가입
+    int selParent(ParentSigninDto dto);
+    int insKid(ParentKid dto); //마이페이지 아이 추가
+    int putParent(UpParentDto dto);//마이페이지 정보수정
+
+    int selKid(ParentKid kid);
 
 }
