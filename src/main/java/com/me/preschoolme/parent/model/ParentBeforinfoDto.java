@@ -1,10 +1,9 @@
 package com.me.preschoolme.parent.model;
 
-
 import lombok.Data;
 
 @Data
-public class ParentKid {
+public class ParentBeforinfoDto {
     private int iparent;
-    private int ikid;
+    private int ilevel;
 }

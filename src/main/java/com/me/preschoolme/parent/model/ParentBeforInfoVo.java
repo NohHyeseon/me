@@ -3,13 +3,10 @@ package com.me.preschoolme.parent.model;
 import lombok.Data;
 
 @Data
-public class ParentUpdDto {
-    private int iparent;
+public class ParentBeforInfoVo {
     private String parentNm;
     private String phoneNb;
     private String uid;
-    private String upw;
-    private String code;
-    private int irank;
+    private String email;
 
 }

@@ -1,14 +1,15 @@
 package com.me.preschoolme.parent;
 
-import com.google.rpc.Code;
-import com.me.preschoolme.common.Const;
+import com.google.rpc.context.AttributeContext;
 import com.me.preschoolme.common.ResVo;
+import com.me.preschoolme.exception.*;
 import com.me.preschoolme.parent.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.me.preschoolme.common.Const.*;
+import javax.naming.AuthenticationException;
+
 
 @Service
 @Slf4j
@@ -21,12 +22,11 @@ public class ParentService {
         try {
             CodeVo vo = mapper.selCode(dto);
             if (!dto.getCode().equals(vo.getCode())) {
-                return null;//에러코드 송출
+                throw new RestApiException(AuthErrorCode.CHECK_DUPLICATION_ID);
             }
             return vo;
-
         } catch (Exception e) {
-            return null;//에러메세지 송출
+            throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -35,13 +35,10 @@ public class ParentService {
         String checkUid = mapper.checkParentInfo(dto.getUid());
         ResVo response = new ResVo();
         if (checkUid != null) {
-            response.setIsValid(-2);
-            response.setMessage("이미 있는 아이디");
-
+            throw new RestApiException(AuthErrorCode.ALREADY_EXIST_ID);
         }
         if (dto.getUid() == null) {
-            response.setIsValid(-1);//값이 비었음
-            response.setMessage("입력하지않음");
+            throw new RestApiException(AuthErrorCode.NOT_ENTER_ID);
         }
         if (checkUid == null) {
             response.setIsValid(1); //회원가입 가능
@@ -50,76 +47,77 @@ public class ParentService {
         return response;
     }
 
-    //회원가입
+    //회원가입, 성공시 t_parent_kid 테이블에 ikidPK, iparentPK 인서트
     public ResVo insParent(ParentInsDto dto) {
-        ResVo result = new ResVo();
-        if (dto.getIsValid() != 1) {
-            result.setResult(-1);//회원가입 불가
-            result.setMessage("아이디 중복체크를 누르세요");
-            return result;
-        }
-        int success = mapper.insParent(dto);
 
-        if (success > 0) {
-            result.setResult(1);
-            result.setMessage("회원가입 성공");
+        if (dto.getIsValid() != 1) {
+            throw new RestApiException(AuthErrorCode.CHECK_DUPLICATION_ID);
+        }
+
+        if (dto.getIsValid() == 1) {
+            ResVo vo = new ResVo();
+            mapper.insParent(dto);
             ParentKid pk = new ParentKid();
             pk.setIkid(dto.getIkid());
             pk.setIparent(dto.getIparent());
-            mapper.insKid(pk);
-            return result;
+            mapper.insParentKidTable(pk);
+            vo.setResult(1);
+            return vo;
         } else {
             // 데이터베이스 삽입이 실패한 경우
-            throw new RuntimeException("회원가입 실패: 데이터베이스 삽입 오류");
+            throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
     }
 
-    //iparent, ikid 테이블에 추가
-    public CodeVo postKidCode(CodeDto dto) {
-        CodeVo vo = mapper.selCode(dto);
-        //code를 이용해서 PK가져옴
-
+    //부모님 로그인
+    public ParentKid parentSignin(ParentSigninDto dto) {
+        ParentSigninDto saveVo = mapper.selParent(dto);
         ParentKid pk = new ParentKid();
-        pk.setIkid(vo.getIkid());
-        pk.setIparent(dto.getIparent());
-        mapper.insKid(pk);
-        if (vo.getIkid() < 0) {
-            throw new RuntimeException(RUNTIME_EX_MESSAGE);
+        if (dto.getUid() != null && dto.getUpw() != null && dto.getUpw().equals(saveVo.getUpw())) {
+            pk.setIparent(saveVo.getIparent());
+            pk.setIkid(saveVo.getIkid());
         }
-
-
-        return vo;
-
+        return pk;
     }
+
+    //원래정보 불러오기
+    public ParentBeforInfoVo getParentEdit(ParentBeforinfoDto dto) {
+        ParentBeforInfoVo vo = mapper.selBeforeInfo(dto);
+        return vo;
+    }
+
 
     //부모 마이페이지ㅏ 정보수정
     public ResVo putParent(UpParentDto dto) {
         ResVo vo = new ResVo();
-        if (dto.getParentNm() == null && dto.getPhoneNb() == null && dto.getAddress() == null
+        if (dto.getParentNm() == null && dto.getPhoneNb() == null && dto.getEmail() == null
                 && dto.getUpw() == null) {
-            throw new RuntimeException(RUNTIME_EX_MESSAGE);// 예외처리
+            return vo;
+            //throw new RestApiException(AuthErrorCode.CHECK_CODE);
         }
         int result1 = mapper.putParent(dto);
         if (result1 == 0) {
-            throw new RuntimeException();
+            vo.setResult(-1);
+            return vo;
+            //throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
-        log.info("vo: {}", vo);
+        vo.setResult(result1);
+
         return vo;
 
     }
-
-    public ParentKid parentSignin(ParentSigninDto dto){
-        ParentSigninVo saveVo = new ParentSigninVo();
+    //마이페이지 원아추가
+    public CodeVo postKidCode(CodeDto dto) {
+        CodeVo vo = mapper.selCode(dto);
         ParentKid pk = new ParentKid();
-        if(dto.getUid() != null && dto.getUpw() !=null &&dto.getUpw().equals(saveVo.getUpw())){
-            mapper.selParent(dto);
-            dto.setIparent(pk.getIparent());
-//            pk.setIkid(mapper.selKid());
-        }
-        return null;
+        pk.setIkid(vo.getIkid());
+        pk.setIparent(dto.getIparent());
+        mapper.insParentKidTable(pk);
+        return vo;
     }
 
 }
+
 
 
 

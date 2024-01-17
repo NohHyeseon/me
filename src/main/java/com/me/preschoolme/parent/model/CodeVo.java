@@ -11,4 +11,6 @@ public class CodeVo {
     private String kidNm;
     private int iclass;
 
+
+
 }

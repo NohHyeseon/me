@@ -38,16 +38,24 @@ public class ParentController {
         return service.parentSignin(dto);
     }
 
-    //부모 마이페이지상 식별코드로 원아등록
-    @PostMapping("/kidadd")
-    public CodeVo postAddkid(@RequestBody CodeDto dto) {
-        return service.postKidCode(dto);
+    @GetMapping("/edit")
+    public ParentBeforInfoVo getParentEdit(@RequestBody ParentBeforinfoDto dto){
+        return service.getParentEdit(dto);
     }
 
-    @PutMapping("/putParent")
+    @PutMapping("/putparent")
     public ResVo putParent(@RequestBody UpParentDto dto){
         return service.putParent(dto);
     }
+
+
+
+    //부모 마이페이지상 식별코드로 원아등록
+    @PostMapping("/kidadd")
+    public CodeVo postParentKidAdd(@RequestBody CodeDto dto) {
+        return service.postKidCode(dto);
+    }
+
 
 
 

@@ -5,12 +5,10 @@ import lombok.Data;
 @Data
 public class UpParentDto {
     private int iparent;
-    private int irank;
+    private int ilevel;
     private String parentNm;
-    private String upw;
     private String phoneNb;
-    private String address;
-
-
+    private String email;
+    private String upw;
 
 }

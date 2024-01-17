@@ -4,18 +4,17 @@
 <mapper namespace="com.me.preschoolme.parent.ParentMapper">
 
     <select id="selCode">
-        select K.ikid, K.kid_nm as kidNm, K.iclass, K.code
-        from t_kid K
-        join t_parent P
-        on K.code = P.code
-        where P.code =#{code}
+        select ikid, kid_nm as kidNm, iclass, code
+        from t_kid
+        where code =#{code}
     </select>
 
 
 
-    <insert id="insKid">
+    <insert id="insParentKidTable">
         insert into t_parent_kid
-        set ikid = #{ikid} and iparent = #{iparent}
+        set ikid = #{ikid}
+        , iparent = #{iparent}
     </insert>
 
 <!--    <select id="selId">-->
@@ -24,8 +23,10 @@
 <!--        where uid = #{uid}-->
 <!--    </select>-->
     <select id="selParent">
-        selet uid, upw
-        from t_parent
+        selet a.uid, a.upw, a.iparent, b.ikid
+        from t_parent a
+        join t_parent_kid b
+        on a.iparent = b.iparent
         where uid = #{uid} and upw = #{upw}
     </select>
 
@@ -43,26 +44,37 @@
         from t_parent
         where uid =#{uid}
     </select>
-    <select id="selKid">
-        select ikid
-        from t_parent_kid
-        where ikid = #{ikid}
-    </select>
-
 
     <insert id="insParent" useGeneratedKeys="true" keyProperty="iprent">
         insert into t_parent
         set parent_nm = #{parentNm}, uid = #{uid}, upw = #{upw},
-        phone_nb = #{phoneNb}, irelation = #{irelation}
+        phone_nb = #{phoneNb}, irelation = #{irelation} ,email =#{email}
     </insert>
+
+    <select id="selBeforeInfo">
+        select uid, parent_nm as parentNm, phone_nb as phoneNb, email
+        from t_parent
+        where iparent = #{iparent} and ilevel =#{ilevel}
+    </select>
 
     <update id="putParent">
         update t_parent
-        set parent_nm = #{parentNm}, phone_nb = #{phoneNb},
-        address = #{address}, upw = #{upw},
-        irank = #{irank}
+       set
+            <if test="parentNm ! = null">
+                parent_nm = #{parentNm}
+            </if>
+            <if test="phoneNb != null">
+                ,phone_nb =#{phoneNb}
+            </if>
+            <if test="email != null">
+                ,pr_email=#{email}
+            </if>
+            <if test="upw != null">
+                ,upw = #{upw}
+            </if>
         where iparent = #{iparent}
     </update>
+
 
    
 

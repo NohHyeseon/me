@@ -5,10 +5,13 @@ import lombok.Data;
 
 @Data
 public class ParentSigninDto {
-
-    private String uid;
-    private String upw;
+    @JsonIgnore
+    private int ikid;
     @JsonIgnore
     private int iparent;
+    private String uid;
+    private String upw;
+
+
 
 }
