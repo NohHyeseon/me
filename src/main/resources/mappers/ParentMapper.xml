@@ -9,8 +9,6 @@
         where code =#{code}
     </select>
 
-
-
     <insert id="insParentKidTable">
         insert into t_parent_kid
         set ikid = #{ikid}
