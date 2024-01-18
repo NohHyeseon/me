@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "코드 입력")
-public class CodeDto {
-    private String code;
+@Schema(title = "회원 탈퇴")
+public class ParentDeleteDto {
     private int iparent;
-
 }

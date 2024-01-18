@@ -18,7 +18,9 @@ public enum AuthErrorCode implements  ErrorCode{
     VALID_PASSWORD(HttpStatus.NOT_FOUND,"비밀번호를 확인해주세요"),
     CHANGE_JUST_ONETHING(HttpStatus.BAD_REQUEST, "한개 이상 입력하세요"),
     NEED_SIGNIN(HttpStatus.UNAUTHORIZED,"로그인이 필요합니다"),
-    NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND,"refresh-token이 없습니다");
+    NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND,"refresh-token이 없습니다"),
+    NOT_CORRECT_INFORMATION(HttpStatus.BAD_REQUEST,"잘못된 요청"),
+    NOT_ENTER_ACCESS(HttpStatus.BAD_REQUEST,"권한이 없음");
 
 
 

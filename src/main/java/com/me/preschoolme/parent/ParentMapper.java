@@ -19,6 +19,8 @@ public interface ParentMapper {
 
     int putParent(UpParentDto dto);//마이페이지 정보수정
 
+    int delParent(ParentDeleteDto dto);
+
 
 
 

@@ -5,15 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "로그인")
-public class ParentSigninDto {
-    @JsonIgnore
-    private int ikid;
-    @JsonIgnore
+@Schema(title = "Parent isDel 처리")
+public class ParentDelete {
     private int iparent;
-    private String uid;
-    private String upw;
-
-
-
+    private int isdel;
 }

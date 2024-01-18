@@ -29,12 +29,18 @@
     </select>
 
 
-    <update id="upCheckUid">
-        <selectKey resultType="String" keyProperty="uid" order="BEFORE">
-            select uid
-            from t_parent
-        </selectKey>
-        update duplication_check
+<!--    <update id="upCheckUid">-->
+<!--        <selectKey resultType="String" keyProperty="uid" order="BEFORE">-->
+<!--            select uid-->
+<!--            from t_parent-->
+<!--        </selectKey>-->
+<!--        update duplication_check-->
+<!--    </update>-->
+
+    <update id="delParent">
+        update t_parent
+        set pr_is_del=1
+        where iparent=#{iparent}
     </update>
 
     <select id="checkParentInfo">
@@ -72,6 +78,8 @@
             </if>
         where iparent = #{iparent}
     </update>
+
+
 
 
    

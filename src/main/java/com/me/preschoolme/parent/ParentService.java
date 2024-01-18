@@ -1,6 +1,5 @@
 package com.me.preschoolme.parent;
 
-import com.google.rpc.context.AttributeContext;
 import com.me.preschoolme.common.ResVo;
 import com.me.preschoolme.exception.*;
 import com.me.preschoolme.parent.model.*;
@@ -42,6 +41,7 @@ public class ParentService {
         }
         if (checkUid == null) {
             response.setIsValid(1); //회원가입 가능
+            response.setIsValid(1); //회원가입 가능
             response.setMessage("사용가능한 아이디");
         }
         return response;
@@ -82,6 +82,10 @@ public class ParentService {
 
     //원래정보 불러오기
     public ParentBeforInfoVo getParentEdit(ParentBeforinfoDto dto) {
+        ParentBeforinfoDto beforinfoDto = new ParentBeforinfoDto();
+        if(dto.getIparent() != beforinfoDto.getIparent() ){
+            throw new RestApiException(AuthErrorCode.NOT_CORRECT_INFORMATION);
+        }
         ParentBeforInfoVo vo = mapper.selBeforeInfo(dto);
         return vo;
     }
@@ -106,16 +110,31 @@ public class ParentService {
         return vo;
 
     }
+
     //마이페이지 원아추가
     public CodeVo postKidCode(CodeDto dto) {
-        CodeVo vo = mapper.selCode(dto);
+        CodeVo vo = new CodeVo();
+        if(dto.getCode()!= vo.getCode()){
+            throw new RestApiException(AuthErrorCode.CHECK_CODE);
+        }else {
+        vo = mapper.selCode(dto);
         ParentKid pk = new ParentKid();
         pk.setIkid(vo.getIkid());
         pk.setIparent(dto.getIparent());
         mapper.insParentKidTable(pk);
-        return vo;
+        return vo;}
     }
 
+    //부모 정보 삭제
+    public ResVo delParentSelf(ParentDeleteDto dto) {
+        ResVo vo = new ResVo();
+        int delete = mapper.delParent(dto);
+        if(delete ==0){
+            throw new RestApiException(AuthErrorCode.NOT_CORRECT_INFORMATION);
+
+        }else vo.setResult(1);
+            return vo;
+    }
 }
 
 

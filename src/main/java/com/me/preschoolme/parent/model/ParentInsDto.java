@@ -1,9 +1,11 @@
 package com.me.preschoolme.parent.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(name = "부모 정보 입력", title = "식별코드 인증 후 회원가입")
 public class ParentInsDto {
     @JsonIgnore
     private int ikid;
@@ -18,5 +20,5 @@ public class ParentInsDto {
     private String upw;
     @JsonIgnore
     private String code;
-    private int irank;
+
 }
