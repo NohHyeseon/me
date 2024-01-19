@@ -20,6 +20,8 @@ public enum AuthErrorCode implements  ErrorCode{
     NEED_SIGNIN(HttpStatus.UNAUTHORIZED,"로그인이 필요합니다"),
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND,"refresh-token이 없습니다"),
     NOT_CORRECT_INFORMATION(HttpStatus.BAD_REQUEST,"잘못된 요청"),
+    NOT_IMPORTED(HttpStatus.BAD_REQUEST ,"정보를 불러올 수 없음"),
+    OVER_FIX_NOTICE(HttpStatus.BAD_REQUEST, "공지갯수를 초과했습니다"),
     NOT_ENTER_ACCESS(HttpStatus.BAD_REQUEST,"권한이 없음");
 
 

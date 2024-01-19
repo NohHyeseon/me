@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.preschoolme.preschool.FullNoticeMapper">
+
+
+    <select id="getFullNoticeFix">
+        SELECT F.ifull_notice as iFullNotice , F.full_title as fullTitle, T.teacher_nm as writer,
+        F.full_notice_fix as fullNoticeFix, F.created_at as createdAt
+        FROM t_full_notice F
+        JOIN t_teacher T
+        ON F.iteacher = T.iteacher
+        where F.fullNoticeFix = 1
+        ORDER BY F.createdAt DESC
+    </select>
+
+    <select id="getFullNoticelist">
+        SELECT F.ifull_notice as iFullNotice , F.full_title as fullTitle, T.teacher_nm as writer,
+         F.created_at as createdAt
+        FROM t_full_notice F
+        JOIN t_teacher T
+        ON F.iteacher = T.iteacher
+        ORDER BY F.createdAt DESC
+        limit #{starIdx},#{row}
+    </select>
+
+    <select id="selNoticePic">
+        SELECT full_pic
+        FROM t_full_notice_pics
+        where ifull_notice = #{iFullNotice}
+    </select>
+
+   <select id="getFullNotice">
+       SELECT N.full_title, N.full_contents, T.teacher_nm,
+       N.created_at, P.full_pic
+       FROM t_full_notice N
+       JOIN t_teacher T
+       ON N.iteacher = T.iteacher
+       where ifull_notice =#{iFullNotice}
+   </select>
+
+</mapper>
