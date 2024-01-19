@@ -8,6 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+@Schema(title = "유치원 소식 전체 조회")
 public class SelFullNoticeVo {
     private String fullTitle;
     private int writer;

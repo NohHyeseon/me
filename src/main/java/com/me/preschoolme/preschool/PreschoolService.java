@@ -13,6 +13,7 @@ public class PreschoolService {
     private final PreschoolMapper mapper;
 
     public List<KidProfileVo> getKidProfile(){
+
         List<KidProfileVo> vo = mapper.getKidProfile();
         return vo;
     }

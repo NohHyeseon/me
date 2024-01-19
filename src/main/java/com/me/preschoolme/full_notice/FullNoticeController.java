@@ -2,6 +2,7 @@ package com.me.preschoolme.full_notice;
 
 import com.me.preschoolme.full_notice.model.SelFullNoticeDto;
 import com.me.preschoolme.full_notice.model.SelFullNoticeVo;
+import com.me.preschoolme.full_notice.model.SelNoticeVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,10 @@ public class FullNoticeController {
         return service.getAllFullNotice(dto);
     }
 
-
-
+    @GetMapping
+    public SelNoticeVo getNotice(int iFullNotice){
+        return service.getFullNotice(iFullNotice);
+    }
 
 
 }

@@ -5,6 +5,7 @@ import com.me.preschoolme.exception.RestApiException;
 import com.me.preschoolme.preschool.model.KidProfileVo;
 import com.me.preschoolme.preschool.model.TeacherProfileVo;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/preschool")
+@Tag(name = "유치원 현황 불러오기", description = "유치원 선생님 및 반 별 원아 불러오기")
 public class PreschoolController {
     private final PreschoolService service;
 

@@ -30,7 +30,7 @@
         where ifull_notice = #{iFullNotice}
     </select>
 
-   <select id="getFullNotice">
+   <select id="getNotice">
        SELECT N.full_title as fullTitle, N.full_contents as fullContents,
        T.teacher_nm as writer, N.created_at createdAt
        FROM t_full_notice N

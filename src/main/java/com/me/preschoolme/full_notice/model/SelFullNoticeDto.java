@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(title = "유치원 소식 전체 조회")
 public class SelFullNoticeDto {
     @JsonIgnore//시큐리티 쓰면 지울 거
     private int ilevel;

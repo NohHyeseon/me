@@ -14,7 +14,7 @@ public interface FullNoticeMapper {
     List<SelFullNoticeVo> getFullNoticelist(SelFullNoticeDto dto);
 
     List<String> selNoticePic(int iFullNotice); //notice안 사진 불러오기
-    SelFullNoticeVo getFullNotice(int iFullNotice); //notice불러오기
+    SelNoticeVo getNotice(int iFullNotice); //notice불러오기
 
 
 }
