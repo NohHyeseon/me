@@ -31,8 +31,8 @@
     </select>
 
    <select id="getFullNotice">
-       SELECT N.full_title, N.full_contents, T.teacher_nm,
-       N.created_at, P.full_pic
+       SELECT N.full_title as fullTitle, N.full_contents as fullContents,
+       T.teacher_nm as writer, N.created_at createdAt
        FROM t_full_notice N
        JOIN t_teacher T
        ON N.iteacher = T.iteacher

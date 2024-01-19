@@ -5,12 +5,14 @@ import com.me.preschoolme.common.Const;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SelFullNoticeVo {
-
     private String fullTitle;
     private int writer;
     private int fullNoticeFix;
     private String createdAt;
+
 
 }

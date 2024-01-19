@@ -5,6 +5,7 @@ import com.me.preschoolme.exception.RestApiException;
 import com.me.preschoolme.full_notice.model.SelFullNoticeFixVo;
 import com.me.preschoolme.full_notice.model.SelFullNoticeDto;
 import com.me.preschoolme.full_notice.model.SelFullNoticeVo;
+import com.me.preschoolme.full_notice.model.SelNoticeVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,6 @@ public class FullNoticeService {
 
         return voList;
     }
+
 
 }
