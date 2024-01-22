@@ -1,9 +1,8 @@
-package com.me.preschoolme.full_notice;
+package com.me.preschoolme.fullnotice;
 
-import com.me.preschoolme.full_notice.model.SelFullNoticeFixVo;
-import com.me.preschoolme.full_notice.model.SelFullNoticeDto;
-import com.me.preschoolme.full_notice.model.SelFullNoticeVo;
-import com.me.preschoolme.full_notice.model.SelNoticeVo;
+import com.me.preschoolme.fullnotice.model.SelFullNoticeDto;
+import com.me.preschoolme.fullnotice.model.SelFullNoticeVo;
+import com.me.preschoolme.fullnotice.model.SelNoticeVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

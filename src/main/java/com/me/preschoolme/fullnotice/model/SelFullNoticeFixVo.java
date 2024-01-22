@@ -1,4 +1,4 @@
-package com.me.preschoolme.full_notice.model;
+package com.me.preschoolme.fullnotice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
