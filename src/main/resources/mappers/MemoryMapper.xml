@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.preschoolme.memory.MemoryMapper">
+
+    <!-- 수정 전 원래 있던 내용 불러오기 -->
+    <select id="selMemory">
+        SELECT memory_title AS memoryTitle , memory_contents AS memoryContents
+        FROM t_memory
+        WHERE imemory = #{imemory}
+    </select>
+    <select id="selMemoryPic">
+        select memory_pic as memoryPic
+        from t_memory_album
+        where imemory = #{imemory}
+    </select>
+    <select id="selImemory">
+        select imemory
+        from t_memory
+        where imemory = #{imemory}
+    </select>
+
+
+
+</mapper>
