@@ -4,22 +4,17 @@
 <mapper namespace="com.me.preschoolme.memory.MemoryMapper">
 
     <!-- 수정 전 원래 있던 내용 불러오기 -->
+
     <select id="selMemory">
-        SELECT memory_title AS memoryTitle , memory_contents AS memoryContents
+        SELECT memory_title as memoryTitle, memory_contents as memoryContents
         FROM t_memory
-        WHERE imemory = #{imemory}
+        WHERE imemory = #{imemory};
     </select>
     <select id="selMemoryPic">
-        select memory_pic as memoryPic
+        select imemory_pic
         from t_memory_album
         where imemory = #{imemory}
     </select>
-    <select id="selImemory">
-        select imemory
-        from t_memory
-        where imemory = #{imemory}
-    </select>
-
 
 
 </mapper>

@@ -16,20 +16,8 @@ import java.util.List;
 public class MemoryService {
     private final MemoryMapper mapper;
 
-    public SelMemoryVo selMemory(int imemory){
-        //한개의 앨범안에 여러개의 사진이 들어가야함
-        String exist = mapper.selImemory(imemory);
-        if(exist ==null){
-            throw new RestApiException(AuthErrorCode.NOT_CORRECT_INFORMATION);
-        }
-        if(imemory < 0 ){
-            throw new RestApiException(AuthErrorCode.NOT_CORRECT_INFORMATION);
-        }
-        SelMemoryVo memory = mapper.selMemory(imemory);
-        List<String> pics = mapper.selMemoryPic(imemory);
-        memory.setMemoryPic(pics);
-       //한개의 memory 안에 여러개의 사진을 넣어서 return  해줘야함
-
-        return memory;
+    public SelMemoryVo getMemoryEdit(int imemory){
+        return null;
     }
+
 }

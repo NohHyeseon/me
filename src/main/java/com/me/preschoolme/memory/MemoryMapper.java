@@ -8,11 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface MemoryMapper {
-
     SelMemoryVo selMemory(int imemory);
-
-    List<String> selMemoryPic(int imemory);
-
-    String selImemory(int imemory);
+    SelMemoryVo selMemoryPic(int imemory);
 
 }
