@@ -16,5 +16,11 @@
         where imemory = #{imemory}
     </select>
 
+    <insert id="insComment" useGeneratedKeys="true" keyProperty="imemoryComment">
+        insert into t_memory_comment
+        set imemory = #{imemory}, memory_commnet = #{memoryComment},
+        iteacher = #{iteacher}, iparent = #{iparent}
+    </insert>
+
 
 </mapper>

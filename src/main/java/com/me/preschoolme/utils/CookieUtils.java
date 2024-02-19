@@ -1,4 +1,4 @@
-package com.me.preschoolme.common;
+package com.me.preschoolme.utils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

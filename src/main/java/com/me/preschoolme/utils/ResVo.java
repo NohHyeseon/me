@@ -1,15 +1,12 @@
-package com.me.preschoolme.common;
+package com.me.preschoolme.utils;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor //기본생성자
+@NoArgsConstructor
 public class ResVo {
     private int result;
-    private int isValid;
-    private String message;
 }
